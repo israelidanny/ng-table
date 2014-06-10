@@ -478,10 +478,10 @@ var ngTableController = ['$scope', 'ngTableParams', '$timeout', function ($scope
         };
     })();
 
-    $scope.$watch('params.$params', function (newParams, oldParams) {
+    $scope.$watch('params.$params | json', function (newParams, oldParams) {
         $scope.params.settings().$scope = $scope;
 
-        if (!angular.equals(newParams.filter, oldParams.filter)) {
+        if (!angular.equals(JSON.parse(newParams).filter, JSON.parse(oldParams).filter)) {
             delayFilter(function () {
                 $scope.params.$params.page = 1;
                 $scope.params.reload();
